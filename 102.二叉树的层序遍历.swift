@@ -69,9 +69,24 @@ public class TreeNode {
  */
 class Solution {
     func levelOrder(_ root: TreeNode?) -> [[Int]] {
+        guard let root = root else { return [] }
+        var queue = [root]
         var result = [[Int]]()
-        if let val = root?.val {
-            result.append([val])
+        while !queue.isEmpty {
+            var levelCount = queue.count
+            var levelResult = [Int]()
+            while levelCount > 0 {
+                let node = queue.removeFirst()
+                levelResult.append(node.val)
+                levelCount -= 1
+                if let left = node.left {
+                    queue.append(left)
+                }
+                if let right = node.right {
+                    queue.append(right)
+                }
+            }
+            result.append(levelResult)
         }
         return result
     }
@@ -80,7 +95,7 @@ class Solution {
 
 let tree = TreeNode(3)
 tree.left = TreeNode(9)
-tree.right = TreeNode(30)
+tree.right = TreeNode(20)
 tree.right?.left = TreeNode(15)
 tree.right?.right = TreeNode(7)
 
