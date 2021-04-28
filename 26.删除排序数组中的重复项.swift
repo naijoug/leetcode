@@ -60,12 +60,9 @@ class Solution {
         guard nums.count > 1 else { return nums.count }
         var count = 0
         for i in 1..<nums.count {
-            if nums[count] != nums[i] {
-                count += 1
-                if count != i {
-                    nums[count] = nums[i]
-                }
-            }
+            guard nums[count] != nums[i] else { continue }
+            count += 1
+            nums[count] = nums[i]
         }
         return count + 1
     }
@@ -77,5 +74,5 @@ var nums2 = [0, 0, 1, 1, 1, 2, 3, 4, 5]
 var nums = [0, 1, 2, 3, 4, 5]
 
 let solution = Solution()
-print(solution.removeDuplicates(&nums))
-print(nums)
+print(solution.removeDuplicates(&nums2))
+print(nums2)
