@@ -47,26 +47,6 @@ class Solution {
 }
 // @lc code=end
 
-public class ListNode {
-    public var val: Int
-    public var next: ListNode?
-    public init(_ val: Int) {
-        self.val = val
-        self.next = nil
-    }
-}
-
-func printList(_ node: ListNode?) {
-    var head = node
-    var isHead = true
-    var msg = ""
-    while let val = head?.val {
-        msg += (isHead ? "" : " -> ") +  "\(val)"
-        if isHead { isHead = false }
-        head = head?.next
-    }
-    print(msg)
-}
 
 let l1 = ListNode(2)
 l1.next = ListNode(4)

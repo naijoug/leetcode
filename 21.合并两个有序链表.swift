@@ -23,15 +23,6 @@
  * 
  */
 
-public class ListNode {
-    public var val: Int
-    public var next: ListNode?
-    public init(_ val: Int) {
-        self.val = val
-        self.next = nil
-    }
-}
-
 // @lc code=start
 /**
  * Definition for singly-linked list.
@@ -74,29 +65,46 @@ class Solution {
 }
 // @lc code=end
 
+/// 链表节点
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
+}
 extension ListNode {
+    /// 通过数组构建链表
+    static func build(_ array: [Int]) -> ListNode? {
+        guard !array.isEmpty else { return nil }
+        let head = ListNode(array[0])
+        var p = head
+        for i in 1..<array.count {
+            let node = ListNode(array[i])
+            p.next = node
+            p = node
+        }
+        return head
+    }
+}
+extension ListNode {
+    /// 打印链表数据
     var log: String {
         var msg = "\(val)"
-        var p: ListNode? = self
-        while p?.next != nil {
-            if let val = p?.next?.val {
-                msg += "->\(val)"
-            }
+        var p: ListNode? = self.next
+        while let val = p?.val {
+            msg += "->\(val)"
             p = p?.next
         }
         return msg
     }
 }
 
-let l1 = ListNode(1)
-l1.next = ListNode(2)
-l1.next?.next = ListNode(4)
-
-let l2 = ListNode(1)
-l2.next = ListNode(3)
-l2.next?.next = ListNode(4)
+let l1 = ListNode.build([1, 2, 4])
+let l2 = ListNode.build([1, 3, 4])
 
 let solution = Solution()
-print("l1: \(l1.log)")
-print("l2: \(l2.log)")
+print("l1: \(l1?.log ?? "")")
+print("l2: \(l2?.log ?? "")")
 print("merge: \(solution.mergeTwoLists(l1, l2)?.log ?? "")")
