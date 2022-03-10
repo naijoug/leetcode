@@ -42,10 +42,8 @@ class Solution {
             }
         }
         var result = [Int]()
-        for i in 0..<iNums.count {
-            if iNums[i] > 0 {
-                result.append(i + 1)
-            }
+        for i in 0..<iNums.count where iNums[i] > 0 {
+            result.append(i + 1)
         }
         return result
     }

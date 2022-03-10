@@ -41,10 +41,8 @@ class Solution {
     func hIndex(_ citations: [Int]) -> Int {
         var iNums = citations
         let count = iNums.count
-        for i in 0..<count {
-            if iNums[i] > count {
-                iNums[i] = count
-            }
+        for i in 0..<count where iNums[i] > count {
+            iNums[i] = count
         }
         var map = Array(repeating: 0, count: count + 1)
         for num in iNums {

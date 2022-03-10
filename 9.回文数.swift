@@ -53,7 +53,7 @@ class Solution {
         }
         var i = 0
         var j = digits.count - 1
-        while ( i < j ) {
+        while i < j {
             guard digits[i] == digits[j] else { return false }
             i += 1
             j -= 1

@@ -79,10 +79,8 @@
 class Solution {
     func max(_ nums: [Int], start: Int, stop: Int) -> Int {
         var max = Int.min
-        for i in start..<stop {
-            if nums[i] > max {
-                max = nums[i]
-            }
+        for i in start..<stop where nums[i] > max {
+            max = nums[i]
         }
         return max
     }
@@ -100,10 +98,8 @@ class Solution {
 class Solution1 {
     func max(_ nums: [Int], start: Int, stop: Int) -> Int {
         var max = Int.min
-        for i in start..<stop {
-            if nums[i] > max {
-                max = nums[i]
-            }
+        for i in start..<stop where nums[i] > max {
+            max = nums[i]
         }
         return max
     }

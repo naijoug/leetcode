@@ -1,0 +1,17 @@
+# rules: https://realm.github.io/SwiftLint/rule-directory.html
+
+# 排除的规则
+disabled_rules:
+    - identifier_name
+    - comment_spacing
+    - orphaned_doc_comment
+    - statement_position
+    - trailing_whitespace
+    - vertical_whitespace
+
+# 配置规则参数
+force_cast: warning     # 强制转换
+type_name:              # 类型命名
+    min_length: 1
+    max_length: 40
+line_length: 200        # 每行代码长度

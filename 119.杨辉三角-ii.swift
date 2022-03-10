@@ -34,8 +34,7 @@
 // @lc code=start
 class Solution {
     func getRow(_ rowIndex: Int) -> [Int] {
-
+        
     }
 }
 // @lc code=end
-

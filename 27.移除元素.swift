@@ -63,13 +63,10 @@
 class Solution {
     func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
         var count = -1
-        for i in 0..<nums.count {
-            if nums[i] != val {
-                count += 1
-                if count != i {
-                    nums[count] = nums[i]
-                }
-            }
+        for i in 0..<nums.count where nums[i] != val {
+            count += 1
+            guard count != i else { continue }
+            nums[count] = nums[i]
         }
         return count + 1
     }
