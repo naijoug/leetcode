@@ -8,6 +8,7 @@ disabled_rules:
     - statement_position
     - trailing_whitespace
     - vertical_whitespace
+    - trailing_newline
 
 # 配置规则参数
 force_cast: warning     # 强制转换

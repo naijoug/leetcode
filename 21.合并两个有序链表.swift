@@ -54,12 +54,7 @@ class Solution {
             }
             p = p?.next
         }
-        if let p1 = op1 {
-            p?.next = p1
-        }
-        if let p2 = op2 {
-            p?.next = p2
-        }
+        p?.next = op1 ?? op2
         return head.next
     }
 }

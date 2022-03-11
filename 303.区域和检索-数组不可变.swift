@@ -62,16 +62,16 @@
 // @lc code=start
 
 class NumArray {
-    let nums: [Int]
+    private let preNums: [Int]
     init(_ nums: [Int]) {
-        self.nums = nums
+        var preNums = [Int](repeating: 0, count: nums.count + 1)
+        for i in 0..<nums.count {
+            preNums[i + 1] = preNums[i] + nums[i]
+        }
+        self.preNums = preNums
     }
     func sumRange(_ i: Int, _ j: Int) -> Int {
-        var sum = 0
-        for k in i...j {
-            sum += nums[k]
-        }
-        return sum
+        preNums[j + 1] - preNums[i]
     }
 }
 
@@ -84,6 +84,6 @@ class NumArray {
 
 let nums = [-2, 0, 3, -5, 2, -1]
 let obj = NumArray(nums)
-print(obj.sumRange(0, 2))
-print(obj.sumRange(2, 5))
-print(obj.sumRange(0, 5))
+print(obj.sumRange(0, 2))   // 1
+print(obj.sumRange(2, 5))   // -1
+print(obj.sumRange(0, 5))   // -3
