@@ -2,6 +2,7 @@
 
 # 排除的规则
 disabled_rules:
+    - comma
     - identifier_name
     - comment_spacing
     - orphaned_doc_comment

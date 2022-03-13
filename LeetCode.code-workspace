@@ -2,6 +2,14 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"name": "LeetCode",
+			"path": "../../../../../../Cloud/OneDrive/Workspace/naijoug/LeetCode"
 		}
-	]
+	],
+	"settings": {
+		"debug.console.fontSize": 13,
+		"terminal.integrated.fontSize": 13
+	}
 }
