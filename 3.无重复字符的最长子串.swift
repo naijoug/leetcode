@@ -63,7 +63,34 @@
 // @lc code=start
 class Solution {
     func lengthOfLongestSubstring(_ s: String) -> Int {
-        
+        let chars = [Character](s)
+        var window = [Character: Int]()
+        var left = 0
+        var right = 0
+        var res = 0
+        while right < chars.count {
+            let rightChar = chars[right]
+            right += 1
+            window[rightChar] = window[rightChar] + 1
+            while window[rightChar] ?? 0 > 1 {
+                let leftChar = chars[left]
+                left += 1
+                window[leftChar] = (window[leftChar] ?? 0) - 1
+            }
+            res = max(res, right - left)
+        }
+        return res
     }
 }
 // @lc code=end
+
+let s1 = "abcabcbb" // 3
+let s2 = "bbbbb"    // 1
+let s3 = "pwwkew"   // 3
+let s4 = ""
+
+let solution = Solution()
+print("solution1: \(solution.lengthOfLongestSubstring(s1))")
+print("solution2: \(solution.lengthOfLongestSubstring(s2))")
+print("solution3: \(solution.lengthOfLongestSubstring(s3))")
+print("solution4: \(solution.lengthOfLongestSubstring(s4))")
