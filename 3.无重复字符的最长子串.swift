@@ -71,7 +71,7 @@ class Solution {
         while right < chars.count {
             let rightChar = chars[right]
             right += 1
-            window[rightChar] = window[rightChar] + 1
+            window[rightChar] = (window[rightChar] ?? 0) + 1
             while window[rightChar] ?? 0 > 1 {
                 let leftChar = chars[left]
                 left += 1

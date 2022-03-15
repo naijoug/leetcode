@@ -59,6 +59,13 @@
 // @lc code=start
 class Solution {
     func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
+        
+    }
+}
+// @lc code=end
+
+class Solution1 {
+    func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
         var first = -1
         var last = -1
         var i = 0
@@ -85,7 +92,6 @@ class Solution {
         return [first, last]
     }
 }
-// @lc code=end
 
 let solution = Solution()
 print(solution.searchRange([1], 1))
