@@ -17,17 +17,26 @@ public class ListNode {
     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next }
 }
 extension ListNode {
-    /// 通过数组构建链表
-    static func build(_ array: [Int]) -> ListNode? {
+    /**
+    通过数组构建单链表
+    - Parameter array: 数据数组
+    - Parameter pos: 指定有环的位置 (默认: 无环单链表)
+    */
+    static func buildSingle(_ array: [Int], pos: Int = -1) -> ListNode? {
         guard !array.isEmpty else { return nil }
-        let head = ListNode(array[0])
-        var p = head
-        for i in 1..<array.count {
+        let dummy = ListNode()
+        var p = dummy
+        var circle: ListNode?
+        for i in 0..<array.count {
             let node = ListNode(array[i])
+            if i == pos { circle = node }
             p.next = node
             p = node
         }
-        return head
+        if let node = circle {
+            p.next = node
+        }
+        return dummy.next
     }
 }
 extension ListNode {
