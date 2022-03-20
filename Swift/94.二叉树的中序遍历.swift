@@ -66,18 +66,7 @@
  * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
  * 
  */
-public class TreeNode {
-    public var val: Int
-    public var left: TreeNode?
-    public var right: TreeNode?
-    public init() { self.val = 0; self.left = nil; self.right = nil; }
-    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
-    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
-        self.val = val
-        self.left = left
-        self.right = right
-    }
-}
+
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -96,20 +85,27 @@ public class TreeNode {
  */
 class Solution {
     func inorderTraversal(_ root: TreeNode?) -> [Int] {
+        guard let root = root else { return [] }
         var result = [Int]()
-        if let left = root?.left {
-            result.append(contentsOf: inorderTraversal(left))
-        }
-        if let val = root?.val {
-            result.append(val)
-        }
-        if let right = root?.right {
-            result.append(contentsOf: inorderTraversal(right))
-        }
+        result.append(contentsOf: inorderTraversal(root.left))
+        result.append(root.val)
+        result.append(contentsOf: inorderTraversal(root.right))
         return result
     }
 }
 // @lc code=end
+
+/// 二叉树节点
+public class TreeNode {
+    public var val: Int
+    public var left: TreeNode?
+    public var right: TreeNode?
+    public init(_ val: Int = 0, _ left: TreeNode? = nil, _ right: TreeNode? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
+    }
+}
 
 let tree1 = TreeNode(1)
 tree1.right = TreeNode(2)
