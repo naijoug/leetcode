@@ -29,18 +29,6 @@
  * 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
  * 
  */
-public class TreeNode {
-    public var val: Int
-    public var left: TreeNode?
-    public var right: TreeNode?
-    public init() { self.val = 0; self.left = nil; self.right = nil; }
-    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
-    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
-        self.val = val
-        self.left = left
-        self.right = right
-    }
-}
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -59,16 +47,11 @@ public class TreeNode {
  */
 class Solution {
     func postorderTraversal(_ root: TreeNode?) -> [Int] {
+        guard let root = root else { return [] }
         var result = [Int]()
-        if let left = root?.left {
-            result.append(contentsOf: postorderTraversal(left))
-        }
-        if let right = root?.right {
-            result.append(contentsOf: postorderTraversal(right))
-        }
-        if let val = root?.val {
-            result.append(val)
-        }
+        result.append(contentsOf: postorderTraversal(root.left))
+        result.append(contentsOf: postorderTraversal(root.right))
+        result.append(root.val)
         return result
     }
 }
