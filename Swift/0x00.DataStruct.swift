@@ -12,9 +12,10 @@ print(array)
 public class ListNode {
     public var val: Int
     public var next: ListNode?
-    public init() { self.val = 0 }
-    public init(_ val: Int) { self.val = val }
-    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next }
+    public init(_ val: Int = 0, _ next: ListNode? = nil) { 
+        self.val = val
+        self.next = next 
+    }
 }
 extension ListNode {
     /**
@@ -39,9 +40,8 @@ extension ListNode {
         return dummy.next
     }
 }
-extension ListNode {
-    /// 打印链表数据
-    var log: String {
+extension ListNode: CustomStringConvertible {
+    public var description: String {
         var msg = "\(val)"
         var p: ListNode? = self.next
         while let val = p?.val {
@@ -49,5 +49,17 @@ extension ListNode {
             p = p?.next
         }
         return msg
+    }
+}
+
+/// 二叉树节点
+public class TreeNode {
+    public var val: Int
+    public var left: TreeNode?
+    public var right: TreeNode?
+    public init(_ val: Int = 0, _ left: TreeNode? = nil, _ right: TreeNode? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
     }
 }
