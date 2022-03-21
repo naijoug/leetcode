@@ -61,7 +61,13 @@
  */
 class Solution {
     func middleNode(_ head: ListNode?) -> ListNode? {
-
+        var p = head
+        var mid = head
+        while p?.next != nil {
+            p = p?.next?.next
+            mid = mid?.next
+        }
+        return mid
     }
 }
 // @lc code=end
