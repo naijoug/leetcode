@@ -68,6 +68,20 @@
  * }
  */
 class Solution {
+    /// 递归解法
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        guard let head = head else { return nil }
+        guard let next = head.next else { return head }
+        let last = reverseList(next)
+        head.next?.next = head
+        head.next = nil
+        return last
+    }
+}
+// @lc code=end
+
+class Solution1 {
+    /// 迭代解法
     func reverseList(_ head: ListNode?) -> ListNode? {
         var prev: ListNode?
         var current = head
@@ -80,7 +94,6 @@ class Solution {
         return prev
     }
 }
-// @lc code=end
 
 /// 链表节点
 public class ListNode {
