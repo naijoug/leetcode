@@ -1,3 +1,10 @@
+/**
+BFS: Breadth First Search
+DFS: Depth First Search
+
+BST: Binary Search Tree
+*/
+
 print("Int.min: \(Int.min)")
 print("Int.max: \(Int.max)")
 print("Int16.min: \(Int16.min)")
