@@ -61,9 +61,57 @@
 // @lc code=start
 class Solution {
     func fib(_ n: Int) -> Int {
+        guard n != 0, n != 1 else { return n }
+        var fn_1: Int = 1
+        var fn_2: Int = 0
+        var fn: Int = 0
+        for _ in 2..<(n + 1) {
+            fn = fn_1 + fn_2
+            fn_2 = fn_1
+            fn_1 = fn
+        }
+        return fn
+    }
+}
+// @lc code=end
+
+class Solution3 {
+    private var dp: [Int: Int] = [0: 0, 1: 1]
+    func fib(_ n: Int) -> Int {
+        if let fn = dp[n] { return fn }
+        for i in dp.count..<(n + 1) {
+            dp[i] = (dp[i - 1] ?? 0) + (dp[i - 2] ?? 0)
+        }
+        return dp[n] ?? 0
+    }
+}
+
+class Solution2 {
+    private var dp: [Int: Int] = [0: 0, 1: 1]
+    func fib(_ n: Int) -> Int {
+        if let fn = dp[n] { return fn }
+        let fn = fib(n - 1) + fib(n - 2)
+        dp[n] = fn
+        return fn
+    }
+}
+
+class Solution1 {
+    func fib(_ n: Int) -> Int {
         if n == 0 { return 0 }
         if n == 1 { return 1 }
         return fib(n - 1) + fib(n - 2)
     }
 }
-// @lc code=end
+
+let solution = Solution()
+print(solution.fib(4))
+
+let solution3 = Solution3()
+print(solution3.fib(4))
+
+let solution2 = Solution2()
+print(solution2.fib(4))
+
+let solution1 = Solution1()
+print(solution1.fib(4))
