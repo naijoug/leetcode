@@ -70,6 +70,33 @@
 class Solution {
     func coinChange(_ coins: [Int], _ amount: Int) -> Int {
         guard amount > 0 else { return 0 }
+        self.coins = coins.sorted(by: { $0 > $1 })
+        self.cache = [0: 0]
+        return backtrack(amount)
+    }
+    private var coins = [Int]()
+    private var cache = [Int: Int]()
+    private func backtrack(_ amount: Int) -> Int {
+        if let count = cache[amount] { return count }
+        
+        var minCount: Int = Int.max
+        for coin in coins {
+            guard coin > 0, amount - coin >= 0 else { continue }
+            let count = backtrack(amount - coin)
+            guard count != -1 else { continue }
+            cache[amount - coin] = count
+            minCount = min(minCount, count)
+        }
+        cache[amount] = minCount == Int.max ? -1 : (minCount + 1)
+        return cache[amount] ?? -1
+    }
+}
+// @lc code=end
+
+
+class Solution1 {
+    func coinChange(_ coins: [Int], _ amount: Int) -> Int {
+        guard amount > 0 else { return 0 }
         let sortCoins = coins.sorted(by: { $0 > $1 })
         var count = 0
         var balance = amount
@@ -90,7 +117,6 @@ class Solution {
         return -1
     }
 }
-// @lc code=end
 
 let solution = Solution()
 // print(solution.coinChange([1, 2, 5], 11))
@@ -99,4 +125,13 @@ let solution = Solution()
 // print(solution.coinChange([1], 1))
 // print(solution.coinChange([1], 2))
 // print(solution.coinChange([2, 5, 10, 1], 27))
-print(solution.coinChange([186, 419, 83, 408], 6249))
+print(solution.coinChange([186, 419, 83, 408], 6249)) // 20
+
+// let solution1 = Solution1()
+// print(solution.coinChange([1, 2, 5], 11))
+// print(solution.coinChange([2], 3))
+// print(solution.coinChange([1], 0))
+// print(solution.coinChange([1], 1))
+// print(solution.coinChange([1], 2))
+// print(solution.coinChange([2, 5, 10, 1], 27))
+// print(solution1.coinChange([186, 419, 83, 408], 6249))
