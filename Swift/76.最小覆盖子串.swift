@@ -65,8 +65,102 @@
 // @lc code=start
 class Solution {
     func minWindow(_ s: String, _ t: String) -> String {
+        let schars = [Character](s)
+        let tchars = [Character](t)
+        let scount = schars.count
+        let tcount = tchars.count
+        guard tcount <= scount else { return "" }
         
+        var need = [Character: Int]()
+        for char in tchars {
+            need[char] = (need[char] ?? 0) + 1
+        }
+
+        func isValid() -> Bool {
+            !need.values.contains(where: { $0 > 0 })
+        }
+        
+        var start: Int = 0
+        var count: Int = 0
+
+        var i = 0
+        var j = 0
+        while i < scount {
+            let ichar = schars[i]
+            if need.keys.contains(ichar) {
+                need[ichar] = (need[ichar] ?? 0) - 1
+            }
+            i += 1
+            guard isValid() else { continue }
+            while j < i {
+                let jchar = schars[j]
+                if need.keys.contains(jchar) {
+                    need[jchar] = min(1, (need[jchar] ?? 0) + 1)
+                }
+                j += 1
+                guard !isValid() else { continue }
+                if count == 0 || count > (i - j) {
+                    start = j - 1
+                    count = i - j + 1
+                }
+                break
+            }
+        }
+        guard count > 0 else { return "" }
+        return String(schars[start..<(start + count)])
     }
 }
 // @lc code=end
 
+class Solution1 {
+    func minWindow(_ s: String, _ t: String) -> String {
+        let schars = [Character](s)
+        let tchars = [Character](t)
+        let scount = schars.count
+        let tcount = tchars.count
+        guard tcount <= scount else { return "" }
+        
+        var need = [Character: Int]()
+        for char in schars {
+            need[char] = 0
+        }
+        for char in tchars {
+            need[char] = (need[char] ?? 0) + 1
+        }
+        var needCount = tcount
+
+        var start: Int = 0
+        var count: Int = .max
+
+        var i = 0
+        var j = 0
+        while i < scount {
+            let ichar = schars[i]
+            if need[ichar] ?? 0 > 0 {
+                needCount -= 1
+            }
+            need[ichar] = (need[ichar] ?? 0) - 1
+            while needCount == 0 {
+                if count > (i - j + 1) {
+                    start = j
+                    count = i - j + 1
+                }
+
+                let jchar = schars[j]
+                if need[jchar] ?? 0 >= 0 {
+                    needCount += 1
+                }
+                need[jchar] = (need[jchar] ?? 0) + 1
+                j += 1
+            }
+            i += 1
+        }
+        return count == .max ? "" : String(schars[start..<(start + count)])
+    }
+}
+
+let solution = Solution()
+print(solution.minWindow("ADOBECODEBANC", "ABC"))
+// print(solution.minWindow("a", "a"))
+// print(solution.minWindow("ab", "a"))
+// print(solution.minWindow("aa", "aa"))
