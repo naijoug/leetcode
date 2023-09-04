@@ -59,6 +59,7 @@
 // @lc code=start
 class Solution {
     func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
+        let x = ""
         
     }
 }
