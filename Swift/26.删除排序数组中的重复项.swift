@@ -57,6 +57,22 @@
 // @lc code=start
 class Solution {
     func removeDuplicates(_ nums: inout [Int]) -> Int {
+        var slow = 0 
+        var fast = 0
+        while ( fast < nums.count ) {
+            if ( nums[fast] != nums[slow] ) {
+                slow += 1
+                nums[slow] = nums[fast] 
+            }
+            fast += 1
+        }
+        return slow + 1
+    }
+}
+// @lc code=end
+
+class Solution1 {
+    func removeDuplicates(_ nums: inout [Int]) -> Int {
         guard nums.count > 1 else { return nums.count }
         var count = 0
         for i in 1..<nums.count {
@@ -67,7 +83,6 @@ class Solution {
         return count + 1
     }
 }
-// @lc code=end
 
 var nums1 = [1, 1, 2]
 var nums2 = [0, 0, 1, 1, 1, 2, 3, 4, 5]
