@@ -62,6 +62,22 @@
 // @lc code=start
 class Solution {
     func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        var slow = 0;
+        var fast = 0;
+        while ( fast < nums.count ) {
+            if ( nums[fast] != val ) {
+                nums[slow] = nums[fast]
+                slow += 1
+            }
+            fast += 1
+        }
+        return slow
+    }
+}
+// @lc code=end
+
+class Solution1 {
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
         var count = -1
         for i in 0..<nums.count where nums[i] != val {
             count += 1
@@ -71,7 +87,6 @@ class Solution {
         return count + 1
     }
 }
-// @lc code=end
 
 // var nums = [0]
 // var nums = [0, 1, 2, 2]
