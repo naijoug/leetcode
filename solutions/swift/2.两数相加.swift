@@ -42,7 +42,38 @@
  */
 class Solution {
     func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        return nil
+        var left = l1
+        var right = l2
+        let head = ListNode(0)
+        var result: ListNode? = head
+        var carry = 0
+        var sum = 0
+        while ( left != nil && right != nil ) {
+            sum = (left?.val ?? 0) + (right?.val ?? 0) + carry
+            result?.next = ListNode(sum % 10)
+            result = result?.next
+            carry = sum / 10
+            left = left?.next
+            right = right?.next
+        }
+        while ( left != nil ) {
+            sum = (left?.val ?? 0) + carry
+            result?.next = ListNode(sum % 10)
+            result = result?.next
+            carry = sum / 10
+            left = left?.next
+        }
+        while ( right != nil ) {
+            sum = (right?.val ?? 0) + carry
+            result?.next = ListNode(sum % 10)
+            result = result?.next
+            carry = sum / 10
+            right = right?.next
+        }
+        if (carry > 0) {
+            result?.next = ListNode(carry)
+        }
+        return head.next
     }
 }
 // @lc code=end
