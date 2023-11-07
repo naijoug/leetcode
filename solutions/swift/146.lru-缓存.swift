@@ -74,7 +74,7 @@ class LRUCache {
 
     private var dict = [Int: Node]()
     private var linkedList = DoubleLinkedList()
-
+    
     private let capacity: Int
     init(_ capacity: Int) {
         self.capacity = capacity
